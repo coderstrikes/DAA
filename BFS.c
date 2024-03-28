@@ -6,7 +6,7 @@ void breadth_first_search(int adj[][MAX],int visited[],int start){
 	visited[start] = 1;
 	while(rear != front){
 		start = queue[++front];
-		printf("%c \t",start + 65);
+		printf("%c -> ",start + 65);
 		for(i = 0; i < MAX; i++){
 			if(adj[start][i] == 1 && visited[i] == 0){
 				queue[++rear] = i;
@@ -23,6 +23,7 @@ int main(){
 		for(j = 0; j < MAX; j++)
 			scanf("%d", &adj[i][j]);
 		}
+	printf("BFS Traversal:");
 	breadth_first_search(adj,visited,0);
 	return 0;
 }
