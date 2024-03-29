@@ -14,18 +14,7 @@ int uni(int i, int j) {
     }
     return 0;
 }
-int main() {
-    printf("Enter the no. of vertices:");
-    scanf("%d", &n);
-    printf("\nEnter the adjacency matrix:\n");
-    for (i = 1; i <=n; i++) {
-        for (j = 1; j <=n; j++) {
-            scanf("%d", &adj[i][j]);
-            if (adj[i][j] == 0 )
-                adj[i][j] = 999;
-        }
-    }
-    printf("The edges of MST are:\n");
+void kruskal(int adj[][25]){
     while (ne < n) {
 	 	min = 999; 
         for (i = 1; i <= n; i++) {
@@ -45,6 +34,20 @@ int main() {
         }
         adj[a][b] = adj[b][a] = 999;
     }
-    printf("MINIMUM COST= %d", mincost);
-    return 0;
+    printf("The minimum cost of spanning tree is = %d", mincost);
+}
+int main() {
+    printf("Enter the no. of vertices:");
+    scanf("%d", &n);
+    printf("\nEnter the adjacency matrix:\n");
+    for (i = 1; i <=n; i++) {
+        for (j = 1; j <=n; j++) {
+            scanf("%d", &adj[i][j]);
+            if (adj[i][j] == 0 )
+                adj[i][j] = 999;
+        }
+    }
+    printf("The edges of MST are:\n");
+    kruskal(adj);
+	return 0;
 }
