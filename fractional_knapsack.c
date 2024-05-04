@@ -51,6 +51,6 @@ int main() {
     ratio = fractional_knapsack(W, n);
     for (i = 1; i <= n; i++)
         sum = sum + (p[i] * ratio[i]);
-    printf("The maximum profit is :%d %d", sum1,sum2);
+    printf("The maximum profit is :%d", sum);
     return 0;
 }
