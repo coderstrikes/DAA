@@ -1,32 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
-typedef struct {
+struct Activity {
     int start;
     int finish;
-} Activity;
+};
 int compare(const void *a, const void *b) {
-    return ((Activity *)a)->start - ((Activity *)b)->start;
+    struct Activity *x = (struct Activity *)a;
+    struct Activity *y = (struct Activity *)b;
+    return x->finish - y->finish;
 }
-int main() {
-    int max_activities = 100;
-    Activity activity[max_activities];
-    int num_activities;
-    printf("Enter the number of activities: ");
-    scanf("%d", &num_activities);
-    printf("Enter start and finish times for each activity:\n");
-    for (int i = 0; i < num_activities; i++) {
-        printf("Activity %d: ", i + 1);
-        scanf("%d %d", &activity[i].start, &activity[i].finish);
-    }
-    qsort(activity, num_activities, sizeof(Activity), compare);
-    printf("Following activities are selected: ");
-    printf("%d ", 1);
-    int last_selected = 0;
-    for (int j = 1; j < num_activities; j++) {
-        if (activity[j].start >= activity[last_selected].finish) {
-            printf("%d ", j + 1);
-            last_selected = j;
+void activitySelection(struct Activity arr[], int n) {
+    qsort(arr, n, sizeof(struct Activity), compare);
+    int i = 0;
+    printf("The following activities are selected:\n");
+    printf("(%d, %d) ", arr[i].start, arr[i].finish);
+    for (int j = 1; j < n; j++) {
+        if (arr[j].start >= arr[i].finish) {
+            printf("(%d, %d) ", arr[j].start, arr[j].finish);
+            i = j;
         }
     }
+}
+int main() {
+    int n;
+    printf("Enter the number of activities: ");
+    scanf("%d", &n);
+    struct Activity arr[n];
+    printf("Enter start and finish times for each activity:\n");
+    for (int i = 0; i < n; i++) {
+        printf("Activity %d: ", i + 1);
+        scanf("%d %d", &arr[i].start, &arr[i].finish);
+    }
+    activitySelection(arr, n);
     return 0;
 }
